@@ -8,21 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		95C6297A283241AA00944D58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C62979283241AA00944D58 /* AppDelegate.swift */; };
-		95C6297C283241AA00944D58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C6297B283241AA00944D58 /* ViewController.swift */; };
 		95C6297E283241AA00944D58 /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 95C6297D283241AA00944D58 /* Experience.rcproject */; };
 		95C62981283241AA00944D58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C6297F283241AA00944D58 /* Main.storyboard */; };
 		95C62983283241AC00944D58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95C62982283241AC00944D58 /* Assets.xcassets */; };
 		95C62986283241AC00944D58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C62984283241AC00944D58 /* LaunchScreen.storyboard */; };
+		95C6298D2832424400944D58 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C6298C2832424400944D58 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		95C62976283241AA00944D58 /* MostraAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MostraAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C62979283241AA00944D58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		95C6297B283241AA00944D58 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		95C6297D283241AA00944D58 /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Experience.rcproject; sourceTree = "<group>"; };
 		95C62980283241AA00944D58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		95C62982283241AC00944D58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95C62985283241AC00944D58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		95C6298C2832424400944D58 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,11 +56,11 @@
 			isa = PBXGroup;
 			children = (
 				95C62979283241AA00944D58 /* AppDelegate.swift */,
-				95C6297B283241AA00944D58 /* ViewController.swift */,
 				95C6297D283241AA00944D58 /* Experience.rcproject */,
 				95C6297F283241AA00944D58 /* Main.storyboard */,
 				95C62982283241AC00944D58 /* Assets.xcassets */,
 				95C62984283241AC00944D58 /* LaunchScreen.storyboard */,
+				95C6298C2832424400944D58 /* HomeViewController.swift */,
 			);
 			path = MostraAR;
 			sourceTree = "<group>";
@@ -136,9 +136,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95C6297C283241AA00944D58 /* ViewController.swift in Sources */,
 				95C6297A283241AA00944D58 /* AppDelegate.swift in Sources */,
 				95C6297E283241AA00944D58 /* Experience.rcproject in Sources */,
+				95C6298D2832424400944D58 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +295,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -325,6 +326,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
