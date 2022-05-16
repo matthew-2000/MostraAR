@@ -13,6 +13,8 @@
 		95C62983283241AC00944D58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95C62982283241AC00944D58 /* Assets.xcassets */; };
 		95C62986283241AC00944D58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C62984283241AC00944D58 /* LaunchScreen.storyboard */; };
 		95C6298D2832424400944D58 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C6298C2832424400944D58 /* HomeViewController.swift */; };
+		95C6298F2832891D00944D58 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C6298E2832891D00944D58 /* ARViewController.swift */; };
+		95C6299228328A0D00944D58 /* DemoVideo.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 95C6299128328A0D00944D58 /* DemoVideo.MOV */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		95C62982283241AC00944D58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95C62985283241AC00944D58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95C6298C2832424400944D58 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		95C6298E2832891D00944D58 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
+		95C6299128328A0D00944D58 /* DemoVideo.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = DemoVideo.MOV; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,14 +59,24 @@
 		95C62978283241AA00944D58 /* MostraAR */ = {
 			isa = PBXGroup;
 			children = (
+				95C62990283289F400944D58 /* Resources */,
 				95C62979283241AA00944D58 /* AppDelegate.swift */,
 				95C6297D283241AA00944D58 /* Experience.rcproject */,
 				95C6297F283241AA00944D58 /* Main.storyboard */,
 				95C62982283241AC00944D58 /* Assets.xcassets */,
 				95C62984283241AC00944D58 /* LaunchScreen.storyboard */,
 				95C6298C2832424400944D58 /* HomeViewController.swift */,
+				95C6298E2832891D00944D58 /* ARViewController.swift */,
 			);
 			path = MostraAR;
+			sourceTree = "<group>";
+		};
+		95C62990283289F400944D58 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				95C6299128328A0D00944D58 /* DemoVideo.MOV */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95C62986283241AC00944D58 /* LaunchScreen.storyboard in Resources */,
+				95C6299228328A0D00944D58 /* DemoVideo.MOV in Resources */,
 				95C62983283241AC00944D58 /* Assets.xcassets in Resources */,
 				95C62981283241AA00944D58 /* Main.storyboard in Resources */,
 			);
@@ -139,6 +154,7 @@
 				95C6297A283241AA00944D58 /* AppDelegate.swift in Sources */,
 				95C6297E283241AA00944D58 /* Experience.rcproject in Sources */,
 				95C6298D2832424400944D58 /* HomeViewController.swift in Sources */,
+				95C6298F2832891D00944D58 /* ARViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

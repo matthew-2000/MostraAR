@@ -45,29 +45,33 @@
         <!--View Controller-->
         <scene sceneID="Bw6-Oi-czg">
             <objects>
-                <viewController id="bfG-a9-Dz3" sceneMemberID="viewController">
+                <viewController id="bfG-a9-Dz3" customClass="ARViewController" customModule="MostraAR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jXo-IS-PjY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <arView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sgo-HY-aTW">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                             </arView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fqa-6C-19g"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="fqa-6C-19g" firstAttribute="bottom" secondItem="Sgo-HY-aTW" secondAttribute="bottom" id="F9z-h4-vZo"/>
                             <constraint firstItem="Sgo-HY-aTW" firstAttribute="leading" secondItem="fqa-6C-19g" secondAttribute="leading" id="Ntz-JE-YLR"/>
                             <constraint firstItem="Sgo-HY-aTW" firstAttribute="top" secondItem="fqa-6C-19g" secondAttribute="top" id="UDN-k2-Q6q"/>
+                            <constraint firstItem="fqa-6C-19g" firstAttribute="bottom" secondItem="Sgo-HY-aTW" secondAttribute="bottom" id="rHa-zM-6Tr"/>
                             <constraint firstItem="fqa-6C-19g" firstAttribute="trailing" secondItem="Sgo-HY-aTW" secondAttribute="trailing" id="wBx-jf-Jah"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="iJs-Lq-Jx6"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="arView" destination="Sgo-HY-aTW" id="IMT-z1-alq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6d9-5v-agi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3067" y="129"/>
+            <point key="canvasLocation" x="3066.666666666667" y="128.57142857142856"/>
         </scene>
         <!--Home-->
         <scene sceneID="kY8-En-11P">
@@ -81,7 +85,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="NHO-Cy-aGO" kind="relationship" relationship="rootViewController" id="epd-hr-sxJ"/>
+                        <segue destination="NHO-Cy-aGO" kind="relationship" relationship="rootViewController" id="wS5-On-5uA"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sbH-cH-Xjy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
