@@ -16,9 +16,9 @@ class ARViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureARView()
-        createTV()
+        self.tabBarController?.tabBar.isHidden = true
         
+        configureARView()
     }
     
     func configureARView() {
@@ -33,10 +33,12 @@ class ARViewController: UIViewController {
         arView.enableTapOnObject()
         //arView.debugOptions = [.showAnchorGeometry]
         arView.session.run(config, options: [])
+        createTV()
     }
     
     func createTV() {
-        let dimensions: SIMD3<Float> = [70, 5, 50]
+//        let dimensions: SIMD3<Float> = [70, 5, 50]
+        let dimensions: SIMD3<Float> = [1, 0.05, 0.7]
         
         // Create TV housing
         let housingMesh = MeshResource.generateBox(size: dimensions)
@@ -54,7 +56,8 @@ class ARViewController: UIViewController {
         screenEntity.setPosition([0, dimensions.y/2 + 0.001, 0], relativeTo: housingEntity)
         
         // create anchor
-        let anchor = AnchorEntity(.image(group: "AR Resources", name: "first"))
+//        let anchor = AnchorEntity(.image(group: "AR Resources", name: "first"))
+        let anchor = AnchorEntity(plane: .vertical)
         anchor.addChild(housingEntity)
         arView.scene.addAnchor(anchor)
         

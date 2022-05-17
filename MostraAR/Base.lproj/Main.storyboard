@@ -108,10 +108,10 @@
             </objects>
             <point key="canvasLocation" x="2225" y="826"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="RIY-B2-fGO">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Rxv-PG-SWT" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Rxv-PG-SWT" customClass="TabBarViewController" customModule="MostraAR" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WRR-P1-e0w">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
