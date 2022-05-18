@@ -19,13 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AiU-RY-jhd">
-                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r6X-ad-f9Y">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="910"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="976"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="7J5-wY-eHS">
-                                                <rect key="frame" x="15" y="40" width="384" height="830"/>
+                                                <rect key="frame" x="15" y="40" width="384" height="896"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="csj-IW-9Pb" customClass="CardView" customModule="MostraAR" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="384" height="361"/>
@@ -85,17 +85,23 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vLn-zN-dQr" customClass="CardView" customModule="MostraAR" customModuleProvider="target">
-                                                        <rect key="frame" x="5" y="401" width="374" height="429"/>
+                                                        <rect key="frame" x="0.0" y="401" width="384" height="495"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="70" translatesAutoresizingMaskIntoConstraints="NO" id="Yks-n6-OTh">
-                                                                <rect key="frame" x="25" y="65" width="324" height="331"/>
+                                                                <rect key="frame" x="20" y="25" width="344" height="437"/>
                                                                 <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can do it!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQB-Mj-9dv">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="344" height="76"/>
+                                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ohB-em-kW8" customClass="CircularProgressBarView" customModule="MostraAR" customModuleProvider="target">
-                                                                        <rect key="frame" x="122" y="0.0" width="80" height="80"/>
+                                                                        <rect key="frame" x="132" y="146" width="80" height="80"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k9c-gi-SZI">
-                                                                                <rect key="frame" x="21" y="30" width="38" height="20.5"/>
-                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                                                <rect key="frame" x="17.5" y="28" width="45" height="24"/>
+                                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
@@ -109,16 +115,16 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="U6d-Of-Hqk">
-                                                                        <rect key="frame" x="5" y="150" width="314.5" height="181"/>
+                                                                        <rect key="frame" x="0.0" y="296" width="344" height="141"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet, consectetur adipisci elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OdR-C2-8uy">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="314.5" height="101"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="344" height="61"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hG0-47-aUJ">
-                                                                                <rect key="frame" x="0.0" y="131" width="314.5" height="50"/>
+                                                                                <rect key="frame" x="0.0" y="91" width="344" height="50"/>
                                                                                 <color key="backgroundColor" red="0.79655200240000001" green="0.2388860881" blue="0.26265472169999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="50" id="7uE-Ki-lTv"/>
@@ -138,14 +144,18 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                 </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="pQB-Mj-9dv" secondAttribute="trailing" id="ItQ-HY-ubg"/>
+                                                                    <constraint firstItem="pQB-Mj-9dv" firstAttribute="leading" secondItem="Yks-n6-OTh" secondAttribute="leading" id="hI5-ka-eaC"/>
+                                                                </constraints>
                                                             </stackView>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="trailing" secondItem="Yks-n6-OTh" secondAttribute="trailing" constant="25" id="47q-mq-vhN"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Yks-n6-OTh" secondAttribute="trailing" constant="20" id="47q-mq-vhN"/>
                                                             <constraint firstAttribute="bottomMargin" secondItem="Yks-n6-OTh" secondAttribute="bottom" constant="25" id="Ohy-3V-B7P"/>
-                                                            <constraint firstItem="Yks-n6-OTh" firstAttribute="leading" secondItem="vLn-zN-dQr" secondAttribute="leading" constant="25" id="SOI-pP-qO0"/>
-                                                            <constraint firstItem="Yks-n6-OTh" firstAttribute="top" secondItem="vLn-zN-dQr" secondAttribute="top" constant="65" id="USt-1x-zbj"/>
+                                                            <constraint firstItem="Yks-n6-OTh" firstAttribute="leading" secondItem="vLn-zN-dQr" secondAttribute="leading" constant="20" id="SOI-pP-qO0"/>
+                                                            <constraint firstItem="Yks-n6-OTh" firstAttribute="top" secondItem="vLn-zN-dQr" secondAttribute="top" constant="25" id="USt-1x-zbj"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
