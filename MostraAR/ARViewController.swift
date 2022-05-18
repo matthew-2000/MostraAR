@@ -8,6 +8,7 @@
 import UIKit
 import ARKit
 import RealityKit
+import FocusEntity
 
 class ARViewController: UIViewController {
 
@@ -15,9 +16,6 @@ class ARViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.tabBarController?.tabBar.isHidden = true
-        
         configureARView()
     }
     
@@ -33,6 +31,10 @@ class ARViewController: UIViewController {
         arView.enableTapOnObject()
         //arView.debugOptions = [.showAnchorGeometry]
         arView.session.run(config, options: [])
+        addFocusSquare()
+    }
+    
+    @IBAction func addOnClick(_ sender: Any) {
         createTV()
     }
     
@@ -62,6 +64,10 @@ class ARViewController: UIViewController {
         arView.scene.addAnchor(anchor)
         
         housingEntity.generateCollisionShapes(recursive: true)
+    }
+    
+    @IBAction func closeOnClick(_ sender: Any) {
+        self.dismiss(animated: true)
     }
     
 }
@@ -133,6 +139,25 @@ extension ARViewController: ARCoachingOverlayViewDelegate {
         coachingView.goal = .anyPlane
         coachingView.session = arView.session
         arView.addSubview(coachingView)
+    }
+    
+}
+
+// MARK: FocusEntityDelegate
+extension ARViewController: FocusEntityDelegate {
+    
+    func addFocusSquare() {
+        let focusSquare = FocusEntity(on: arView, focus: .classic)
+        focusSquare.delegate = self
+        arView.scene.anchors.append(focusSquare)
+    }
+    
+    func toInitializingState() {
+        //print("Initializing")
+    }
+    
+    func toTrackingState() {
+        //print("Tracking")
     }
     
 }

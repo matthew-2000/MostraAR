@@ -8,14 +8,27 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    
+    @IBOutlet weak var progressdView: CircularProgressBarView!
+    var circularViewDuration: TimeInterval = 2
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setUpCircularProgressBarView()
     }
     
+    func setUpCircularProgressBarView() {
+        let percentage = 0.4
+        progressdView.progressAnimation(duration: circularViewDuration, withPercentage: percentage)
+    }
 
+    @IBAction func openARView(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ARViewControllerID") as! ARViewController
+        viewController.modalPresentationStyle = .fullScreen
+        self.present(viewController, animated: true)
+    }
     /*
     // MARK: - Navigation
 
