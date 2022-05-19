@@ -10,23 +10,29 @@ import UIKit
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var progressdView: CircularProgressBarView!
+    @IBOutlet weak var progressLabel: UILabel!
     var circularViewDuration: TimeInterval = 2
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUpCircularProgressBarView()
         let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refresh))
         self.navigationItem.rightBarButtonItem = refreshButton
 
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        setUpCircularProgressBarView()
+    }
+    
     @objc func refresh() {
+        ProgressController.resetProgress()
         setUpCircularProgressBarView()
     }
     
     func setUpCircularProgressBarView() {
-        let percentage = 0.4
+        let percentage = ProgressController.getProgress()
+        progressLabel.text = "\(Int(percentage*100))%"
         progressdView.progressAnimation(duration: circularViewDuration, withPercentage: percentage)
     }
 

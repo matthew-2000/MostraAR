@@ -141,6 +141,21 @@ extension ARViewController: ARCoachingOverlayViewDelegate {
         arView.addSubview(coachingView)
     }
     
+    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+        anchors.compactMap { $0 as? ARImageAnchor }.forEach {
+            let referenceImage = $0.referenceImage
+            guard let imageName = referenceImage.name else { return }
+            let plane = MeshResource.generatePlane(width: Float(referenceImage.physicalSize.width), depth: Float(referenceImage.physicalSize.height))
+            let material = SimpleMaterial(color: .green, isMetallic: false)
+            let entityPlane = ModelEntity(mesh: plane, materials: [material])
+            let anchorEntity = AnchorEntity(.image(group: "AR Resources", name: imageName))
+            anchorEntity.addChild(entityPlane)
+            arView.scene.anchors.append(anchorEntity)
+            
+            ProgressController.setProgress(imageName: imageName)
+        }
+    }
+    
 }
 
 // MARK: FocusEntityDelegate

@@ -193,6 +193,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Welcome" id="kHy-IW-WjO"/>
                     <connections>
+                        <outlet property="progressLabel" destination="k9c-gi-SZI" id="SKI-dJ-Tct"/>
                         <outlet property="progressdView" destination="ohB-em-kW8" id="ErB-4n-cxC"/>
                     </connections>
                 </viewController>

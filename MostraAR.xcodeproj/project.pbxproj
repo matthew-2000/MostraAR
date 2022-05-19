@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9508A2342834E3F60036670D /* CircularProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9508A2332834E3F60036670D /* CircularProgressBarView.swift */; };
 		9508A2362834EB090036670D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9508A2352834EB090036670D /* CardView.swift */; };
+		956FD6AB28363D1D00E204F0 /* ProgressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956FD6AA28363D1D00E204F0 /* ProgressController.swift */; };
 		95C6297A283241AA00944D58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C62979283241AA00944D58 /* AppDelegate.swift */; };
 		95C6297E283241AA00944D58 /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 95C6297D283241AA00944D58 /* Experience.rcproject */; };
 		95C62981283241AA00944D58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C6297F283241AA00944D58 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		9508A2332834E3F60036670D /* CircularProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBarView.swift; sourceTree = "<group>"; };
 		9508A2352834EB090036670D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		956FD6AA28363D1D00E204F0 /* ProgressController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressController.swift; sourceTree = "<group>"; };
 		95C62976283241AA00944D58 /* MostraAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MostraAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C62979283241AA00944D58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95C6297D283241AA00944D58 /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Experience.rcproject; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				95C6298E2832891D00944D58 /* ARViewController.swift */,
 				9508A2332834E3F60036670D /* CircularProgressBarView.swift */,
 				9508A2352834EB090036670D /* CardView.swift */,
+				956FD6AA28363D1D00E204F0 /* ProgressController.swift */,
 			);
 			path = MostraAR;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 				95C6298F2832891D00944D58 /* ARViewController.swift in Sources */,
 				9508A2362834EB090036670D /* CardView.swift in Sources */,
 				9508A2342834E3F60036670D /* CircularProgressBarView.swift in Sources */,
+				956FD6AB28363D1D00E204F0 /* ProgressController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

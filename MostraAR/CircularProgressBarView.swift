@@ -55,6 +55,9 @@ class CircularProgressBarView: UIView {
         // set the end time
         circularProgressAnimation.duration = duration
         circularProgressAnimation.toValue = withPercentage
+        if withPercentage == 0.0 {
+            circularProgressAnimation.toValue = 0.01
+        }
         circularProgressAnimation.fillMode = .forwards
         circularProgressAnimation.isRemovedOnCompletion = false
         progressLayer.add(circularProgressAnimation, forKey: "progressAnim")
