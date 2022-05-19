@@ -16,6 +16,13 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         setUpCircularProgressBarView()
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refresh))
+        self.navigationItem.rightBarButtonItem = refreshButton
+
+    }
+    
+    @objc func refresh() {
+        setUpCircularProgressBarView()
     }
     
     func setUpCircularProgressBarView() {
@@ -23,12 +30,6 @@ class HomeViewController: UIViewController {
         progressdView.progressAnimation(duration: circularViewDuration, withPercentage: percentage)
     }
 
-    @IBAction func openARView(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "ARViewControllerID") as! ARViewController
-        viewController.modalPresentationStyle = .fullScreen
-        self.present(viewController, animated: true)
-    }
     /*
     // MARK: - Navigation
 
@@ -38,5 +39,17 @@ class HomeViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    @IBAction func openARView(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ARViewControllerID") as! ARViewController
+        viewController.modalPresentationStyle = .fullScreen
+        self.present(viewController, animated: true)
+    }
+    
+    @IBAction func goToQuizOnClick(_ sender: Any) {
+        self.tabBarController?.selectedIndex = 1
+    }
+    
 
 }

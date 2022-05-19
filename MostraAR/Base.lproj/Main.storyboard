@@ -19,35 +19,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AiU-RY-jhd">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r6X-ad-f9Y">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="976"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1026"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="7J5-wY-eHS">
-                                                <rect key="frame" x="15" y="40" width="384" height="896"/>
+                                                <rect key="frame" x="15" y="40" width="384" height="946"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="csj-IW-9Pb" customClass="CardView" customModule="MostraAR" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="384" height="361"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="384" height="411"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="LJP-fc-d2d">
-                                                                <rect key="frame" x="20" y="20" width="344" height="321"/>
+                                                                <rect key="frame" x="20" y="20" width="344" height="371"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icloud.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bPe-6C-c1Y">
-                                                                        <rect key="frame" x="0.0" y="1" width="344" height="146.5"/>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home" translatesAutoresizingMaskIntoConstraints="NO" id="bPe-6C-c1Y">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="344" height="200"/>
                                                                         <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="150" id="ly2-pv-y6u"/>
+                                                                            <constraint firstAttribute="height" constant="200" id="ly2-pv-y6u"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sit amet, consectetur adipisci elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYZ-dA-tUX">
-                                                                        <rect key="frame" x="0.0" y="180" width="344" height="61"/>
+                                                                        <rect key="frame" x="0.0" y="230" width="344" height="61"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gm0-8N-oR5">
-                                                                        <rect key="frame" x="0.0" y="271" width="344" height="50"/>
+                                                                        <rect key="frame" x="0.0" y="321" width="344" height="50"/>
                                                                         <color key="backgroundColor" red="0.79655200240000001" green="0.2388860881" blue="0.26265472169999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="50" id="hbm-vd-0iC"/>
@@ -85,7 +85,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vLn-zN-dQr" customClass="CardView" customModule="MostraAR" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="401" width="384" height="495"/>
+                                                        <rect key="frame" x="0.0" y="451" width="384" height="495"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="70" translatesAutoresizingMaskIntoConstraints="NO" id="Yks-n6-OTh">
                                                                 <rect key="frame" x="20" y="25" width="344" height="437"/>
@@ -140,6 +140,9 @@
                                                                                         <integer key="value" value="15"/>
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
+                                                                                <connections>
+                                                                                    <action selector="goToQuizOnClick:" destination="NHO-Cy-aGO" eventType="touchUpInside" id="91M-Mw-bSl"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                     </stackView>
@@ -280,6 +283,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="bEF-Sj-QNX">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.79655200240000001" green="0.2388860881" blue="0.26265472169999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -312,6 +316,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="kie-SR-h8C" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8ek-mn-ebr">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.79655200240000001" green="0.2388860881" blue="0.26265472169999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -348,8 +353,8 @@
     </scenes>
     <resources>
         <image name="arkit" catalog="system" width="128" height="128"/>
+        <image name="home" width="456" height="456"/>
         <image name="house" catalog="system" width="128" height="106"/>
-        <image name="icloud.fill" catalog="system" width="128" height="88"/>
         <image name="person.fill.questionmark" catalog="system" width="128" height="104"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
