@@ -16,7 +16,6 @@ class ProgressController {
             UserDefaults.standard.set(imageName, forKey: imageName)
             var progressPercentage = UserDefaults.standard.double(forKey: "progress")
             progressPercentage += 1/numberOfImages
-            print(progressPercentage)
             UserDefaults.standard.set(progressPercentage, forKey: "progress")
         }
     }

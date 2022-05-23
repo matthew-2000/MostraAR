@@ -9,11 +9,14 @@ import UIKit
 import ARKit
 import RealityKit
 import FocusEntity
+import Combine
 
 class ARViewController: UIViewController {
 
     @IBOutlet weak var arView: ARView!
     
+    var cancellables = Set<AnyCancellable>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureARView()
@@ -127,6 +130,22 @@ extension ARViewController: ARSessionDelegate {
         print("Status: \(status)")
     }
     
+    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+        anchors.compactMap { $0 as? ARImageAnchor }.forEach {
+            let referenceImage = $0.referenceImage
+            guard let imageName = referenceImage.name else { return }
+            ProgressController.setProgress(imageName: imageName)
+
+            let plane = MeshResource.generatePlane(width: Float(referenceImage.physicalSize.width), depth: Float(referenceImage.physicalSize.height))
+            let material = SimpleMaterial(color: .green, isMetallic: false)
+            let entityPlane = ModelEntity(mesh: plane, materials: [material])
+            let anchorEntity = AnchorEntity(.image(group: "AR Resources", name: imageName))
+            anchorEntity.addChild(entityPlane)
+            
+            arView.scene.anchors.append(anchorEntity)
+        }
+    }
+    
 }
 
 // MARK: ARCoachingOverlayViewDelegate
@@ -139,21 +158,6 @@ extension ARViewController: ARCoachingOverlayViewDelegate {
         coachingView.goal = .anyPlane
         coachingView.session = arView.session
         arView.addSubview(coachingView)
-    }
-    
-    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-        anchors.compactMap { $0 as? ARImageAnchor }.forEach {
-            let referenceImage = $0.referenceImage
-            guard let imageName = referenceImage.name else { return }
-            let plane = MeshResource.generatePlane(width: Float(referenceImage.physicalSize.width), depth: Float(referenceImage.physicalSize.height))
-            let material = SimpleMaterial(color: .green, isMetallic: false)
-            let entityPlane = ModelEntity(mesh: plane, materials: [material])
-            let anchorEntity = AnchorEntity(.image(group: "AR Resources", name: imageName))
-            anchorEntity.addChild(entityPlane)
-            arView.scene.anchors.append(anchorEntity)
-            
-            ProgressController.setProgress(imageName: imageName)
-        }
     }
     
 }
