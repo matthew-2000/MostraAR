@@ -10,6 +10,10 @@
 		9508A2342834E3F60036670D /* CircularProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9508A2332834E3F60036670D /* CircularProgressBarView.swift */; };
 		9508A2362834EB090036670D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9508A2352834EB090036670D /* CardView.swift */; };
 		956FD6AB28363D1D00E204F0 /* ProgressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956FD6AA28363D1D00E204F0 /* ProgressController.swift */; };
+		95738262283B7FDC0094BA52 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95738261283B7FDC0094BA52 /* QuizViewController.swift */; };
+		95738264283B80FE0094BA52 /* AnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95738263283B80FE0094BA52 /* AnswerCell.swift */; };
+		95738266283B90030094BA52 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95738265283B90030094BA52 /* Question.swift */; };
+		95738268283B99CB0094BA52 /* FinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95738267283B99CB0094BA52 /* FinishViewController.swift */; };
 		95C6297A283241AA00944D58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C62979283241AA00944D58 /* AppDelegate.swift */; };
 		95C6297E283241AA00944D58 /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 95C6297D283241AA00944D58 /* Experience.rcproject */; };
 		95C62981283241AA00944D58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C6297F283241AA00944D58 /* Main.storyboard */; };
@@ -25,6 +29,10 @@
 		9508A2332834E3F60036670D /* CircularProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBarView.swift; sourceTree = "<group>"; };
 		9508A2352834EB090036670D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		956FD6AA28363D1D00E204F0 /* ProgressController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressController.swift; sourceTree = "<group>"; };
+		95738261283B7FDC0094BA52 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
+		95738263283B80FE0094BA52 /* AnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCell.swift; sourceTree = "<group>"; };
+		95738265283B90030094BA52 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		95738267283B99CB0094BA52 /* FinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishViewController.swift; sourceTree = "<group>"; };
 		95C62976283241AA00944D58 /* MostraAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MostraAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C62979283241AA00944D58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95C6297D283241AA00944D58 /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Experience.rcproject; sourceTree = "<group>"; };
@@ -48,6 +56,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		95738260283B7FBC0094BA52 /* Quiz */ = {
+			isa = PBXGroup;
+			children = (
+				95738261283B7FDC0094BA52 /* QuizViewController.swift */,
+				95738263283B80FE0094BA52 /* AnswerCell.swift */,
+				95738265283B90030094BA52 /* Question.swift */,
+				95738267283B99CB0094BA52 /* FinishViewController.swift */,
+			);
+			path = Quiz;
+			sourceTree = "<group>";
+		};
 		95C6296D283241AA00944D58 = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +86,7 @@
 		95C62978283241AA00944D58 /* MostraAR */ = {
 			isa = PBXGroup;
 			children = (
+				95738260283B7FBC0094BA52 /* Quiz */,
 				95C62990283289F400944D58 /* Resources */,
 				95C62979283241AA00944D58 /* AppDelegate.swift */,
 				95C6297D283241AA00944D58 /* Experience.rcproject */,
@@ -171,10 +191,14 @@
 				95C6297A283241AA00944D58 /* AppDelegate.swift in Sources */,
 				95C6297E283241AA00944D58 /* Experience.rcproject in Sources */,
 				95C6298D2832424400944D58 /* HomeViewController.swift in Sources */,
+				95738262283B7FDC0094BA52 /* QuizViewController.swift in Sources */,
 				95C6298F2832891D00944D58 /* ARViewController.swift in Sources */,
+				95738266283B90030094BA52 /* Question.swift in Sources */,
 				9508A2362834EB090036670D /* CardView.swift in Sources */,
+				95738264283B80FE0094BA52 /* AnswerCell.swift in Sources */,
 				9508A2342834E3F60036670D /* CircularProgressBarView.swift in Sources */,
 				956FD6AB28363D1D00E204F0 /* ProgressController.swift in Sources */,
+				95738268283B99CB0094BA52 /* FinishViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
