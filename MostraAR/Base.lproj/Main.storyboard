@@ -12,7 +12,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Welcome-->
+        <!--Welcome!-->
         <scene sceneID="rB4-am-ELV">
             <objects>
                 <viewController id="NHO-Cy-aGO" customClass="HomeViewController" customModule="MostraAR" customModuleProvider="target" sceneMemberID="viewController">
@@ -193,7 +193,7 @@
                             <constraint firstItem="qFU-ip-ebp" firstAttribute="bottom" secondItem="AiU-RY-jhd" secondAttribute="bottom" id="kpL-jT-YwB"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Welcome" id="kHy-IW-WjO"/>
+                    <navigationItem key="navigationItem" title="Welcome!" id="kHy-IW-WjO"/>
                     <connections>
                         <outlet property="progressLabel" destination="k9c-gi-SZI" id="SKI-dJ-Tct"/>
                         <outlet property="progressdView" destination="ohB-em-kW8" id="ErB-4n-cxC"/>
@@ -410,7 +410,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mD1-rf-C87" customClass="CardView" customModule="MostraAR" customModuleProvider="target">
                                                             <rect key="frame" x="18" y="8" width="338" height="50"/>
                                                             <subviews>
-                                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0T-CL-dYO">
+                                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0T-CL-dYO">
                                                                     <rect key="frame" x="18" y="8" width="312" height="34"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -422,7 +422,6 @@
                                                                 <constraint firstAttribute="bottomMargin" secondItem="q0T-CL-dYO" secondAttribute="bottom" id="NLd-1n-KSQ"/>
                                                                 <constraint firstItem="q0T-CL-dYO" firstAttribute="leading" secondItem="mD1-rf-C87" secondAttribute="leadingMargin" constant="10" id="Ned-ZS-oAl"/>
                                                                 <constraint firstItem="q0T-CL-dYO" firstAttribute="top" secondItem="mD1-rf-C87" secondAttribute="topMargin" id="XK0-Q1-W2p"/>
-                                                                <constraint firstAttribute="height" constant="50" id="aCE-mz-rTs"/>
                                                                 <constraint firstAttribute="trailingMargin" secondItem="q0T-CL-dYO" secondAttribute="trailing" id="ggr-Dc-x4z"/>
                                                             </constraints>
                                                         </view>

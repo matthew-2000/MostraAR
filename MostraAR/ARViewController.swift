@@ -27,7 +27,7 @@ class ARViewController: UIViewController {
             fatalError("Missing expected asset catalog resources.")
         }
         let config = ARWorldTrackingConfiguration()
-        config.planeDetection = [.vertical, .horizontal]
+        config.planeDetection = [.vertical]
         config.detectionImages = referenceImages
         arView.session.delegate = self
         addCoaching()
@@ -137,11 +137,12 @@ extension ARViewController: ARSessionDelegate {
             ProgressController.setProgress(imageName: imageName)
 
             let plane = MeshResource.generatePlane(width: Float(referenceImage.physicalSize.width), depth: Float(referenceImage.physicalSize.height))
-            let material = SimpleMaterial(color: .green, isMetallic: false)
+            let material = SimpleMaterial(color: .random, isMetallic: false)
             let entityPlane = ModelEntity(mesh: plane, materials: [material])
             let anchorEntity = AnchorEntity(.image(group: "AR Resources", name: imageName))
             anchorEntity.addChild(entityPlane)
             
+            arView.scene.anchors.removeAll()
             arView.scene.anchors.append(anchorEntity)
         }
     }
@@ -179,4 +180,15 @@ extension ARViewController: FocusEntityDelegate {
         //print("Tracking")
     }
     
+}
+
+extension UIColor {
+    static var random: UIColor {
+        return UIColor(
+            red: .random(in: 0...1),
+            green: .random(in: 0...1),
+            blue: .random(in: 0...1),
+            alpha: 1.0
+        )
+    }
 }

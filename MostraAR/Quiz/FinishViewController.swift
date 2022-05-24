@@ -19,7 +19,12 @@ class FinishViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        switch numberCorrectAnswer {
+        case 0...numberQuestion/2:
+            titleLabel.text = "Ops!"
+        default:
+            titleLabel.text = "Congratulation!"
+        }
         scoreLabel.text = "Your score is \(numberCorrectAnswer)/\(numberQuestion)"
         
     }
