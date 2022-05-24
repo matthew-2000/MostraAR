@@ -9,14 +9,12 @@ import UIKit
 import ARKit
 import RealityKit
 import FocusEntity
-import Combine
+import Vision
 
 class ARViewController: UIViewController {
 
     @IBOutlet weak var arView: ARView!
     
-    var cancellables = Set<AnyCancellable>()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         configureARView()
@@ -28,7 +26,11 @@ class ARViewController: UIViewController {
         }
         let config = ARWorldTrackingConfiguration()
         config.planeDetection = [.vertical]
+        config.environmentTexturing = .automatic
+        config.frameSemantics = [.personSegmentation]
         config.detectionImages = referenceImages
+//        viewWidth = Int(arView.bounds.width)
+//        viewHeight = Int(arView.bounds.height)
         arView.session.delegate = self
         addCoaching()
         arView.enableTapOnObject()
@@ -42,12 +44,12 @@ class ARViewController: UIViewController {
     }
     
     func createTV() {
-//        let dimensions: SIMD3<Float> = [70, 5, 50]
+        //let dimensions: SIMD3<Float> = [70, 5, 50]
         let dimensions: SIMD3<Float> = [1, 0.05, 0.7]
         
         // Create TV housing
         let housingMesh = MeshResource.generateBox(size: dimensions)
-        let housingMaterial = SimpleMaterial(color: .black, roughness: 0.4, isMetallic: false)
+        let housingMaterial = SimpleMaterial(color: .black, roughness: 0.4, isMetallic: true)
         let housingEntity = ModelEntity(mesh: housingMesh, materials: [housingMaterial])
         
         // Create TV screen
@@ -61,17 +63,41 @@ class ARViewController: UIViewController {
         screenEntity.setPosition([0, dimensions.y/2 + 0.001, 0], relativeTo: housingEntity)
         
         // create anchor
-//        let anchor = AnchorEntity(.image(group: "AR Resources", name: "first"))
+        //housingEntity.physicsBody = PhysicsBodyComponent(massProperties: .default, material: .default, mode: .dynamic)
         let anchor = AnchorEntity(plane: .vertical)
         anchor.addChild(housingEntity)
         arView.scene.addAnchor(anchor)
-        
-        housingEntity.generateCollisionShapes(recursive: true)
+
     }
     
     @IBAction func closeOnClick(_ sender: Any) {
         self.dismiss(animated: true)
     }
+    
+    
+    // MARK: Hand Interaction
+//
+//    var recentIndexFingerPoint:CGPoint = .zero
+//    var viewWidth:Int = 0
+//    var viewHeight:Int = 0
+//
+//    lazy var request:VNRequest = {
+//        var handPoseRequest = VNDetectHumanHandPoseRequest(completionHandler: handDetectionCompletionHandler)
+//        handPoseRequest.maximumHandCount = 1
+//        return handPoseRequest
+//    }()
+//
+//    func handDetectionCompletionHandler(request: VNRequest?, error: Error?) {
+//        guard let observation = request?.results?.first as? VNHumanHandPoseObservation else { return }
+//        guard let indexFingerTip = try? observation.recognizedPoints(.all)[.indexTip],
+//              indexFingerTip.confidence > 0.3 else {return}
+//        let normalizedIndexPoint = VNImagePointForNormalizedPoint(CGPoint(x: indexFingerTip.location.y, y: indexFingerTip.location.x), viewWidth,  viewHeight)
+//        print("quiii")
+//        if let entity = arView.entity(at: normalizedIndexPoint) as? ModelEntity, entity.name == "tvScreen"  {
+//            print("YESSSSS")
+//        }
+//        recentIndexFingerPoint = normalizedIndexPoint
+//    }
     
 }
 
@@ -105,6 +131,19 @@ extension ARView {
 
 // MARK: ARSessionDelegate
 extension ARViewController: ARSessionDelegate {
+    
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+//        let pixelBuffer = frame.capturedImage
+//        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+//            let handler = VNImageRequestHandler(cvPixelBuffer:pixelBuffer, orientation: .up, options: [:])
+//            do {
+//                try handler.perform([(self?.request)!])
+//
+//            } catch let error {
+//                print(error)
+//            }
+//        }
+    }
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
         var status = ""
