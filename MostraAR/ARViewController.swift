@@ -97,7 +97,9 @@ class ARViewController: UIViewController {
         print("quiii")
         if let entity = arView.entity(at: normalizedIndexPoint) as? ModelEntity, entity.name == "tvScreen"  {
             print("YESSSS")
-            arView.loadVideoMaterial(for: entity)
+            DispatchQueue.main.async {
+                self.arView.loadVideoMaterial(for: entity)
+            }
         }
         recentIndexFingerPoint = normalizedIndexPoint
     }
