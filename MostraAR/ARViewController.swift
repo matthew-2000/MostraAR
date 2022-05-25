@@ -29,8 +29,8 @@ class ARViewController: UIViewController {
         config.environmentTexturing = .automatic
         config.frameSemantics = [.personSegmentation]
         config.detectionImages = referenceImages
-//        viewWidth = Int(arView.bounds.width)
-//        viewHeight = Int(arView.bounds.height)
+        viewWidth = Int(arView.bounds.width)
+        viewHeight = Int(arView.bounds.height)
         arView.session.delegate = self
         addCoaching()
         arView.enableTapOnObject()
@@ -63,7 +63,8 @@ class ARViewController: UIViewController {
         screenEntity.setPosition([0, dimensions.y/2 + 0.001, 0], relativeTo: housingEntity)
         
         // create anchor
-        //housingEntity.physicsBody = PhysicsBodyComponent(massProperties: .default, material: .default, mode: .dynamic)
+//        housingEntity.physicsBody = PhysicsBodyComponent(massProperties: .default, material: .default, mode: .dynamic)
+        housingEntity.generateCollisionShapes(recursive: true)
         let anchor = AnchorEntity(plane: .vertical)
         anchor.addChild(housingEntity)
         arView.scene.addAnchor(anchor)
@@ -76,33 +77,35 @@ class ARViewController: UIViewController {
     
     
     // MARK: Hand Interaction
-//
-//    var recentIndexFingerPoint:CGPoint = .zero
-//    var viewWidth:Int = 0
-//    var viewHeight:Int = 0
-//
-//    lazy var request:VNRequest = {
-//        var handPoseRequest = VNDetectHumanHandPoseRequest(completionHandler: handDetectionCompletionHandler)
-//        handPoseRequest.maximumHandCount = 1
-//        return handPoseRequest
-//    }()
-//
-//    func handDetectionCompletionHandler(request: VNRequest?, error: Error?) {
-//        guard let observation = request?.results?.first as? VNHumanHandPoseObservation else { return }
-//        guard let indexFingerTip = try? observation.recognizedPoints(.all)[.indexTip],
-//              indexFingerTip.confidence > 0.3 else {return}
-//        let normalizedIndexPoint = VNImagePointForNormalizedPoint(CGPoint(x: indexFingerTip.location.y, y: indexFingerTip.location.x), viewWidth,  viewHeight)
-//        print("quiii")
-//        if let entity = arView.entity(at: normalizedIndexPoint) as? ModelEntity, entity.name == "tvScreen"  {
-//            print("YESSSSS")
-//        }
-//        recentIndexFingerPoint = normalizedIndexPoint
-//    }
+
+    var recentIndexFingerPoint:CGPoint = .zero
+    var viewWidth:Int = 0
+    var viewHeight:Int = 0
+    var isVideoLoaded: Bool = false
+
+    lazy var request:VNRequest = {
+        var handPoseRequest = VNDetectHumanHandPoseRequest(completionHandler: handDetectionCompletionHandler)
+        handPoseRequest.maximumHandCount = 1
+        return handPoseRequest
+    }()
+
+    func handDetectionCompletionHandler(request: VNRequest?, error: Error?) {
+        guard let observation = request?.results?.first as? VNHumanHandPoseObservation else { return }
+        guard let indexFingerTip = try? observation.recognizedPoints(.all)[.indexTip],
+              indexFingerTip.confidence > 0.3 else {return}
+        let normalizedIndexPoint = VNImagePointForNormalizedPoint(CGPoint(x: indexFingerTip.location.y, y: indexFingerTip.location.x), viewWidth,  viewHeight)
+        print("quiii")
+        if let entity = arView.entity(at: normalizedIndexPoint) as? ModelEntity, entity.name == "tvScreen"  {
+            print("YESSSS")
+            arView.loadVideoMaterial(for: entity)
+        }
+        recentIndexFingerPoint = normalizedIndexPoint
+    }
     
 }
 
 extension ARView {
-    
+        
     func enableTapOnObject() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
         self.addGestureRecognizer(tapGestureRecognizer)
@@ -116,13 +119,17 @@ extension ARView {
     }
     
     func loadVideoMaterial(for entity: ModelEntity) {
+        print("YESSSS2")
         let asset = AVAsset(url: Bundle.main.url(forResource: "DemoVideo", withExtension: "MOV")!)
         //let asset = AVAsset(url: URL(string: "https://wolverine.raywenderlich.com/content/ios/tutorials/video_streaming/foxVillage.mp4")!)
         let playerItem = AVPlayerItem(asset: asset)
         
         let player = AVPlayer()
+        print("YESSSS3")
         entity.model?.materials = [VideoMaterial(avPlayer: player)]
         
+        print("YESSSS4")
+
         player.replaceCurrentItem(with: playerItem)
         player.play()
     }
@@ -133,16 +140,15 @@ extension ARView {
 extension ARViewController: ARSessionDelegate {
     
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-//        let pixelBuffer = frame.capturedImage
-//        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-//            let handler = VNImageRequestHandler(cvPixelBuffer:pixelBuffer, orientation: .up, options: [:])
-//            do {
-//                try handler.perform([(self?.request)!])
-//
-//            } catch let error {
-//                print(error)
-//            }
-//        }
+        let pixelBuffer = frame.capturedImage
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let handler = VNImageRequestHandler(cvPixelBuffer:pixelBuffer, orientation: .up, options: [:])
+            do {
+                try handler.perform([(self?.request)!])
+            } catch let error {
+                print(error)
+            }
+        }
     }
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
