@@ -58,12 +58,22 @@ class ARViewController: UIViewController {
         let screenEntity = ModelEntity(mesh: screenMesh, materials: [screenMaterial])
         screenEntity.name = "tvScreen"
         
+        // Create control button (start/stop)
+        let buttonMesh = MeshResource.generateBox(size: SIMD3<Float>(0.10, 0.05, 0.10))
+        let buttonMaterial = SimpleMaterial(color: .black, roughness: 0.4, isMetallic: false)
+        let buttonEntity = ModelEntity(mesh: buttonMesh, materials: [buttonMaterial])
+        buttonEntity.name = "start"
+        
+        //add button to housing
+        screenEntity.addChild(buttonEntity)
+        buttonEntity.setPosition([0, dimensions.y + 0.025, dimensions.z/2 + 0.05], relativeTo: screenEntity)
+        screenEntity.generateCollisionShapes(recursive: true)
+        
         // add screen to housing
         housingEntity.addChild(screenEntity)
         screenEntity.setPosition([0, dimensions.y/2 + 0.001, 0], relativeTo: housingEntity)
         
         // create anchor
-//        housingEntity.physicsBody = PhysicsBodyComponent(massProperties: .default, material: .default, mode: .dynamic)
         housingEntity.generateCollisionShapes(recursive: true)
         let anchor = AnchorEntity(plane: .vertical)
         anchor.addChild(housingEntity)
@@ -95,10 +105,11 @@ class ARViewController: UIViewController {
               indexFingerTip.confidence > 0.3 else {return}
         let normalizedIndexPoint = VNImagePointForNormalizedPoint(CGPoint(x: indexFingerTip.location.y, y: indexFingerTip.location.x), viewWidth,  viewHeight)
         print("quiii")
-        if let entity = arView.entity(at: normalizedIndexPoint) as? ModelEntity, entity.name == "tvScreen"  {
+        if let entity = arView.entity(at: normalizedIndexPoint) as? ModelEntity, entity.name == "start"  {
             print("YESSSS")
             DispatchQueue.main.async {
-                self.arView.loadVideoMaterial(for: entity)
+                self.arView.loadVideoMaterial(for: entity.parent as! ModelEntity)
+                //entity.removeFromParent()
             }
         }
         recentIndexFingerPoint = normalizedIndexPoint
@@ -121,17 +132,13 @@ extension ARView {
     }
     
     func loadVideoMaterial(for entity: ModelEntity) {
-        print("YESSSS2")
         let asset = AVAsset(url: Bundle.main.url(forResource: "DemoVideo", withExtension: "MOV")!)
         //let asset = AVAsset(url: URL(string: "https://wolverine.raywenderlich.com/content/ios/tutorials/video_streaming/foxVillage.mp4")!)
         let playerItem = AVPlayerItem(asset: asset)
         
         let player = AVPlayer()
-        print("YESSSS3")
         entity.model?.materials = [VideoMaterial(avPlayer: player)]
         
-        print("YESSSS4")
-
         player.replaceCurrentItem(with: playerItem)
         player.play()
     }
