@@ -20,6 +20,13 @@ class ARViewController: UIViewController {
         configureARView()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        arView.scene.anchors.removeAll()
+        arView.session.pause()
+        arView.session.delegate = nil
+        arView.removeFromSuperview()
+    }
+    
     func configureARView() {
         guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else {
             fatalError("Missing expected asset catalog resources.")
@@ -33,9 +40,9 @@ class ARViewController: UIViewController {
         viewHeight = Int(arView.bounds.height)
         arView.session.delegate = self
         addCoaching()
-        arView.enableTapOnObject()
+        //arView.enableTapOnObject()
         //arView.debugOptions = [.showAnchorGeometry]
-        arView.session.run(config, options: [])
+        arView.session.run(config, options: [.resetTracking, .removeExistingAnchors, .resetSceneReconstruction])
         addFocusSquare()
     }
     
@@ -48,7 +55,7 @@ class ARViewController: UIViewController {
         let dimensions: SIMD3<Float> = [1, 0.05, 0.7]
         
         // Create TV housing
-        let housingMesh = MeshResource.generateBox(size: dimensions)
+        let housingMesh = MeshResource.generateBox(size: [dimensions.x + 0.05, dimensions.y, dimensions.z + 0.05], cornerRadius: 10)
         let housingMaterial = SimpleMaterial(color: .black, roughness: 0.4, isMetallic: true)
         let housingEntity = ModelEntity(mesh: housingMesh, materials: [housingMaterial])
         
@@ -57,16 +64,31 @@ class ARViewController: UIViewController {
         let screenMaterial = SimpleMaterial(color: .white, roughness: 0.2, isMetallic: false)
         let screenEntity = ModelEntity(mesh: screenMesh, materials: [screenMaterial])
         screenEntity.name = "tvScreen"
+        let asset = AVAsset(url: Bundle.main.url(forResource: "DemoVideo", withExtension: "MOV")!)
+        //let asset = AVAsset(url: URL(string: "https://wolverine.raywenderlich.com/content/ios/tutorials/video_streaming/foxVillage.mp4")!)
+        let playerItem = AVPlayerItem(asset: asset)
+        screenEntity.model?.materials = [VideoMaterial(avPlayer: player)]
+        player.replaceCurrentItem(with: playerItem)
         
-        // Create control button (start/stop)
-        let buttonMesh = MeshResource.generateBox(size: SIMD3<Float>(0.10, 0.05, 0.10))
-        let buttonMaterial = SimpleMaterial(color: .black, roughness: 0.4, isMetallic: false)
-        let buttonEntity = ModelEntity(mesh: buttonMesh, materials: [buttonMaterial])
-        buttonEntity.name = "start"
-        
+        // Create start button
+        let buttonEntity = createPlayButton()
         //add button to housing
         screenEntity.addChild(buttonEntity)
-        buttonEntity.setPosition([0, dimensions.y + 0.025, dimensions.z/2 + 0.05], relativeTo: screenEntity)
+        buttonEntity.setPosition([-0.30, dimensions.y + 0.025, dimensions.z/2 + 0.05], relativeTo: screenEntity)
+        screenEntity.generateCollisionShapes(recursive: true)
+        
+        // Create pause button
+        let pauseEntity = createPauseButton()
+        //add button to housing
+        screenEntity.addChild(pauseEntity)
+        pauseEntity.setPosition([0.30, dimensions.y + 0.025, dimensions.z/2 + 0.05], relativeTo: screenEntity)
+        screenEntity.generateCollisionShapes(recursive: true)
+        
+        // Create restart button
+        let restartButton = createRestartButton()
+        //add button to housing
+        screenEntity.addChild(restartButton)
+        restartButton.setPosition([0, dimensions.y + 0.025, dimensions.z/2 + 0.20], relativeTo: screenEntity)
         screenEntity.generateCollisionShapes(recursive: true)
         
         // add screen to housing
@@ -78,7 +100,66 @@ class ARViewController: UIViewController {
         let anchor = AnchorEntity(plane: .vertical)
         anchor.addChild(housingEntity)
         arView.scene.addAnchor(anchor)
-
+    }
+    
+    func createPlayButton() -> ModelEntity {
+        let buttonMesh = MeshResource.generateBox(size: SIMD3<Float>(0.30, 0.05, 0.10), cornerRadius: 10)
+        let buttonMaterial = SimpleMaterial(color: .systemBlue, roughness: 0.4, isMetallic: false)
+        let buttonEntity = ModelEntity(mesh: buttonMesh, materials: [buttonMaterial])
+        buttonEntity.name = "playButton"
+        let text = MeshResource.generateText("Play",
+                              extrusionDepth: 0,
+                                        font: .systemFont(ofSize: 0.07),
+                              containerFrame: .zero,
+                                   alignment: .center,
+                               lineBreakMode: .byWordWrapping)
+        let shader = UnlitMaterial(color: .white)
+        let textEntity = ModelEntity(mesh: text, materials: [shader])
+        textEntity.orientation = simd_quatf(angle: Float.pi + Float.pi/2,
+                                            axis: [1, 0, 0])
+        buttonEntity.addChild(textEntity)
+        textEntity.setPosition([-0.10, 0.026, 0.03], relativeTo: buttonEntity)
+        return buttonEntity
+    }
+    
+    func createPauseButton() -> ModelEntity {
+        let buttonMesh = MeshResource.generateBox(size: SIMD3<Float>(0.30, 0.05, 0.10), cornerRadius: 10)
+        let buttonMaterial = SimpleMaterial(color: .systemBlue, roughness: 0.4, isMetallic: false)
+        let buttonEntity = ModelEntity(mesh: buttonMesh, materials: [buttonMaterial])
+        buttonEntity.name = "pauseButton"
+        let text = MeshResource.generateText("Pause",
+                              extrusionDepth: 0,
+                                        font: .systemFont(ofSize: 0.07),
+                              containerFrame: .zero,
+                                   alignment: .center,
+                               lineBreakMode: .byWordWrapping)
+        let shader = UnlitMaterial(color: .white)
+        let textEntity = ModelEntity(mesh: text, materials: [shader])
+        textEntity.orientation = simd_quatf(angle: Float.pi + Float.pi/2,
+                                            axis: [1, 0, 0])
+        buttonEntity.addChild(textEntity)
+        textEntity.setPosition([-0.10, 0.026, 0.03], relativeTo: buttonEntity)
+        return buttonEntity
+    }
+    
+    func createRestartButton() -> ModelEntity {
+        let buttonMesh = MeshResource.generateBox(size: SIMD3<Float>(0.30, 0.05, 0.10), cornerRadius: 10)
+        let buttonMaterial = SimpleMaterial(color: .systemBlue, roughness: 0.4, isMetallic: false)
+        let buttonEntity = ModelEntity(mesh: buttonMesh, materials: [buttonMaterial])
+        buttonEntity.name = "restartButton"
+        let text = MeshResource.generateText("Restart",
+                              extrusionDepth: 0,
+                                        font: .systemFont(ofSize: 0.07),
+                              containerFrame: .zero,
+                                   alignment: .center,
+                               lineBreakMode: .byWordWrapping)
+        let shader = UnlitMaterial(color: .white)
+        let textEntity = ModelEntity(mesh: text, materials: [shader])
+        textEntity.orientation = simd_quatf(angle: Float.pi + Float.pi/2,
+                                            axis: [1, 0, 0])
+        buttonEntity.addChild(textEntity)
+        textEntity.setPosition([-0.10, 0.026, 0.03], relativeTo: buttonEntity)
+        return buttonEntity
     }
     
     @IBAction func closeOnClick(_ sender: Any) {
@@ -88,12 +169,12 @@ class ARViewController: UIViewController {
     
     // MARK: Hand Interaction
 
-    var recentIndexFingerPoint:CGPoint = .zero
-    var viewWidth:Int = 0
-    var viewHeight:Int = 0
-    var isVideoLoaded: Bool = false
+    var recentIndexFingerPoint : CGPoint = .zero
+    var viewWidth : Int = 0
+    var viewHeight : Int = 0
+    var isVideoLoaded : Bool = false
 
-    lazy var request:VNRequest = {
+    lazy var request : VNRequest = {
         var handPoseRequest = VNDetectHumanHandPoseRequest(completionHandler: handDetectionCompletionHandler)
         handPoseRequest.maximumHandCount = 1
         return handPoseRequest
@@ -104,44 +185,74 @@ class ARViewController: UIViewController {
         guard let indexFingerTip = try? observation.recognizedPoints(.all)[.indexTip],
               indexFingerTip.confidence > 0.3 else {return}
         let normalizedIndexPoint = VNImagePointForNormalizedPoint(CGPoint(x: indexFingerTip.location.y, y: indexFingerTip.location.x), viewWidth,  viewHeight)
-        print("quiii")
-        if let entity = arView.entity(at: normalizedIndexPoint) as? ModelEntity, entity.name == "start"  {
-            print("YESSSS")
-            DispatchQueue.main.async {
-                self.arView.loadVideoMaterial(for: entity.parent as! ModelEntity)
-                //entity.removeFromParent()
+        if let entity = arView.entity(at: normalizedIndexPoint) as? ModelEntity {
+            switch entity.name {
+            case "playButton":
+                playVideo()
+                
+            case "pauseButton":
+                pauseVideo()
+                
+            case "restartButton":
+                DispatchQueue.main.async {
+                    self.restartVideo(for: entity.parent as! ModelEntity)
+                }
+                
+            default: break
+                
             }
         }
         recentIndexFingerPoint = normalizedIndexPoint
+    }
+    
+    var isPlaying = false
+    var isPaused = false
+    let player = AVPlayer()
+    
+    func pauseVideo() {
+        player.pause()
+    }
+    
+    func playVideo() {
+        player.play()
+    }
+    
+    func restartVideo(for entity: ModelEntity) {
+        let asset = AVAsset(url: Bundle.main.url(forResource: "DemoVideo", withExtension: "MOV")!)
+        //let asset = AVAsset(url: URL(string: "https://wolverine.raywenderlich.com/content/ios/tutorials/video_streaming/foxVillage.mp4")!)
+        let playerItem = AVPlayerItem(asset: asset)
+        entity.model?.materials = [VideoMaterial(avPlayer: player)]
+        player.replaceCurrentItem(with: playerItem)
+        player.play()
     }
     
 }
 
 extension ARView {
         
-    func enableTapOnObject() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
-        self.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    @objc func handleTap(recognizer: UITapGestureRecognizer) {
-        let tapLocation = recognizer.location(in: self)
-        if let entity = self.entity(at: tapLocation) as? ModelEntity, entity.name == "tvScreen" {
-            loadVideoMaterial(for: entity)
-        }
-    }
-    
-    func loadVideoMaterial(for entity: ModelEntity) {
-        let asset = AVAsset(url: Bundle.main.url(forResource: "DemoVideo", withExtension: "MOV")!)
-        //let asset = AVAsset(url: URL(string: "https://wolverine.raywenderlich.com/content/ios/tutorials/video_streaming/foxVillage.mp4")!)
-        let playerItem = AVPlayerItem(asset: asset)
-        
-        let player = AVPlayer()
-        entity.model?.materials = [VideoMaterial(avPlayer: player)]
-        
-        player.replaceCurrentItem(with: playerItem)
-        player.play()
-    }
+//    func enableTapOnObject() {
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+//        self.addGestureRecognizer(tapGestureRecognizer)
+//    }
+//
+//    @objc func handleTap(recognizer: UITapGestureRecognizer) {
+//        let tapLocation = recognizer.location(in: self)
+//        if let entity = self.entity(at: tapLocation) as? ModelEntity, entity.name == "tvScreen" {
+//            loadVideoMaterial(for: entity)
+//        }
+//    }
+//
+//    func loadVideoMaterial(for entity: ModelEntity) {
+//        let asset = AVAsset(url: Bundle.main.url(forResource: "DemoVideo", withExtension: "MOV")!)
+//        //let asset = AVAsset(url: URL(string: "https://wolverine.raywenderlich.com/content/ios/tutorials/video_streaming/foxVillage.mp4")!)
+//        let playerItem = AVPlayerItem(asset: asset)
+//
+//        let player = AVPlayer()
+//        entity.model?.materials = [VideoMaterial(avPlayer: player)]
+//
+//        player.replaceCurrentItem(with: playerItem)
+//        player.play()
+//    }
     
 }
 
