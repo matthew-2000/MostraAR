@@ -100,6 +100,8 @@ class ARViewController: UIViewController {
         let anchor = AnchorEntity(plane: .vertical)
         anchor.addChild(housingEntity)
         arView.scene.addAnchor(anchor)
+        
+        hapticFeedback()
     }
     
     func createPlayButton() -> ModelEntity {
@@ -211,10 +213,12 @@ class ARViewController: UIViewController {
     
     func pauseVideo() {
         player.pause()
+        hapticFeedback()
     }
     
     func playVideo() {
         player.play()
+        hapticFeedback()
     }
     
     func restartVideo(for entity: ModelEntity) {
@@ -224,6 +228,13 @@ class ARViewController: UIViewController {
         entity.model?.materials = [VideoMaterial(avPlayer: player)]
         player.replaceCurrentItem(with: playerItem)
         player.play()
+        hapticFeedback()
+    }
+    
+    // Feedback
+    func hapticFeedback() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
     }
     
 }
@@ -300,15 +311,15 @@ extension ARViewController: ARSessionDelegate {
             let referenceImage = $0.referenceImage
             guard let imageName = referenceImage.name else { return }
             ProgressController.setProgress(imageName: imageName)
-
             let plane = MeshResource.generatePlane(width: Float(referenceImage.physicalSize.width), depth: Float(referenceImage.physicalSize.height))
             let material = SimpleMaterial(color: .random, isMetallic: false)
             let entityPlane = ModelEntity(mesh: plane, materials: [material])
             let anchorEntity = AnchorEntity(.image(group: "AR Resources", name: imageName))
             anchorEntity.addChild(entityPlane)
-            
             arView.scene.anchors.removeAll()
+            addFocusSquare()
             arView.scene.anchors.append(anchorEntity)
+            hapticFeedback()
         }
     }
     
