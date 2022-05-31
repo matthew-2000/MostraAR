@@ -320,6 +320,10 @@ extension ARViewController: ARSessionDelegate {
             addFocusSquare()
             arView.scene.anchors.append(anchorEntity)
             hapticFeedback()
+            
+            // With vibration
+            let systemSoundID: SystemSoundID = 1113
+            AudioServicesPlaySystemSound(systemSoundID)
         }
     }
     
