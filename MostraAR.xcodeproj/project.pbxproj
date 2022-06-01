@@ -14,13 +14,15 @@
 		95738264283B80FE0094BA52 /* AnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95738263283B80FE0094BA52 /* AnswerCell.swift */; };
 		95738266283B90030094BA52 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95738265283B90030094BA52 /* Question.swift */; };
 		95738268283B99CB0094BA52 /* FinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95738267283B99CB0094BA52 /* FinishViewController.swift */; };
+		958393652847578200A56100 /* DemoVideo.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 958393642847578200A56100 /* DemoVideo.MOV */; };
+		958393682847591600A56100 /* ARViewController+ARSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958393672847591600A56100 /* ARViewController+ARSessionDelegate.swift */; };
+		9583936A284759DE00A56100 /* ARObjectCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95839369284759DE00A56100 /* ARObjectCreator.swift */; };
 		95C6297A283241AA00944D58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C62979283241AA00944D58 /* AppDelegate.swift */; };
 		95C62981283241AA00944D58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C6297F283241AA00944D58 /* Main.storyboard */; };
 		95C62983283241AC00944D58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95C62982283241AC00944D58 /* Assets.xcassets */; };
 		95C62986283241AC00944D58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95C62984283241AC00944D58 /* LaunchScreen.storyboard */; };
 		95C6298D2832424400944D58 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C6298C2832424400944D58 /* HomeViewController.swift */; };
 		95C6298F2832891D00944D58 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C6298E2832891D00944D58 /* ARViewController.swift */; };
-		95C6299228328A0D00944D58 /* DemoVideo.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 95C6299128328A0D00944D58 /* DemoVideo.MOV */; };
 		95C629972833982C00944D58 /* FocusEntity in Frameworks */ = {isa = PBXBuildFile; productRef = 95C629962833982C00944D58 /* FocusEntity */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +34,9 @@
 		95738263283B80FE0094BA52 /* AnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCell.swift; sourceTree = "<group>"; };
 		95738265283B90030094BA52 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		95738267283B99CB0094BA52 /* FinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishViewController.swift; sourceTree = "<group>"; };
+		958393642847578200A56100 /* DemoVideo.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = DemoVideo.MOV; sourceTree = "<group>"; };
+		958393672847591600A56100 /* ARViewController+ARSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARViewController+ARSessionDelegate.swift"; sourceTree = "<group>"; };
+		95839369284759DE00A56100 /* ARObjectCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARObjectCreator.swift; sourceTree = "<group>"; };
 		95C62976283241AA00944D58 /* MostraAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MostraAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C62979283241AA00944D58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95C62980283241AA00944D58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -39,7 +44,6 @@
 		95C62985283241AC00944D58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95C6298C2832424400944D58 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		95C6298E2832891D00944D58 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
-		95C6299128328A0D00944D58 /* DemoVideo.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = DemoVideo.MOV; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,16 @@
 			path = Quiz;
 			sourceTree = "<group>";
 		};
+		95839366284758D800A56100 /* AR */ = {
+			isa = PBXGroup;
+			children = (
+				95C6298E2832891D00944D58 /* ARViewController.swift */,
+				958393672847591600A56100 /* ARViewController+ARSessionDelegate.swift */,
+				95839369284759DE00A56100 /* ARObjectCreator.swift */,
+			);
+			path = AR;
+			sourceTree = "<group>";
+		};
 		95C6296D283241AA00944D58 = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +98,7 @@
 		95C62978283241AA00944D58 /* MostraAR */ = {
 			isa = PBXGroup;
 			children = (
+				95839366284758D800A56100 /* AR */,
 				95738260283B7FBC0094BA52 /* Quiz */,
 				95C62990283289F400944D58 /* Resources */,
 				95C62979283241AA00944D58 /* AppDelegate.swift */,
@@ -91,7 +106,6 @@
 				95C62982283241AC00944D58 /* Assets.xcassets */,
 				95C62984283241AC00944D58 /* LaunchScreen.storyboard */,
 				95C6298C2832424400944D58 /* HomeViewController.swift */,
-				95C6298E2832891D00944D58 /* ARViewController.swift */,
 				9508A2332834E3F60036670D /* CircularProgressBarView.swift */,
 				9508A2352834EB090036670D /* CardView.swift */,
 				956FD6AA28363D1D00E204F0 /* ProgressController.swift */,
@@ -102,7 +116,7 @@
 		95C62990283289F400944D58 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				95C6299128328A0D00944D58 /* DemoVideo.MOV */,
+				958393642847578200A56100 /* DemoVideo.MOV */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -172,7 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95C62986283241AC00944D58 /* LaunchScreen.storyboard in Resources */,
-				95C6299228328A0D00944D58 /* DemoVideo.MOV in Resources */,
+				958393652847578200A56100 /* DemoVideo.MOV in Resources */,
 				95C62983283241AC00944D58 /* Assets.xcassets in Resources */,
 				95C62981283241AA00944D58 /* Main.storyboard in Resources */,
 			);
@@ -187,9 +201,11 @@
 			files = (
 				95C6297A283241AA00944D58 /* AppDelegate.swift in Sources */,
 				95C6298D2832424400944D58 /* HomeViewController.swift in Sources */,
+				9583936A284759DE00A56100 /* ARObjectCreator.swift in Sources */,
 				95738262283B7FDC0094BA52 /* QuizViewController.swift in Sources */,
 				95C6298F2832891D00944D58 /* ARViewController.swift in Sources */,
 				95738266283B90030094BA52 /* Question.swift in Sources */,
+				958393682847591600A56100 /* ARViewController+ARSessionDelegate.swift in Sources */,
 				9508A2362834EB090036670D /* CardView.swift in Sources */,
 				95738264283B80FE0094BA52 /* AnswerCell.swift in Sources */,
 				9508A2342834E3F60036670D /* CircularProgressBarView.swift in Sources */,
