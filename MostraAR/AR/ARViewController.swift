@@ -13,6 +13,16 @@ import Vision
 class ARViewController: UIViewController {
 
     @IBOutlet weak var arView: ARView!
+    var recentIndexFingerPoint : CGPoint = .zero
+    var viewWidth : Int = 0
+    var viewHeight : Int = 0
+    var numAlbumImage = 1
+
+    lazy var request : VNRequest = {
+        var handPoseRequest = VNDetectHumanHandPoseRequest(completionHandler: handDetectionCompletionHandler)
+        handPoseRequest.maximumHandCount = 1
+        return handPoseRequest
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +41,7 @@ class ARViewController: UIViewController {
             fatalError("Missing expected asset catalog resources.")
         }
         let config = ARWorldTrackingConfiguration()
-        config.planeDetection = [.vertical]
+        config.planeDetection = [.vertical, .horizontal]
         config.environmentTexturing = .automatic
         config.frameSemantics = [.personSegmentation]
         config.detectionImages = referenceImages
@@ -106,45 +116,6 @@ class ARViewController: UIViewController {
     @IBAction func closeOnClick(_ sender: Any) {
         self.dismiss(animated: true)
     }
-    
-    
-    // MARK: Hand Interaction
-    var recentIndexFingerPoint : CGPoint = .zero
-    var viewWidth : Int = 0
-    var viewHeight : Int = 0
-    var isVideoLoaded : Bool = false
-
-    lazy var request : VNRequest = {
-        var handPoseRequest = VNDetectHumanHandPoseRequest(completionHandler: handDetectionCompletionHandler)
-        handPoseRequest.maximumHandCount = 1
-        return handPoseRequest
-    }()
-
-    func handDetectionCompletionHandler(request: VNRequest?, error: Error?) {
-        guard let observation = request?.results?.first as? VNHumanHandPoseObservation else { return }
-        guard let indexFingerTip = try? observation.recognizedPoints(.all)[.indexTip],
-              indexFingerTip.confidence > 0.3 else {return}
-        let normalizedIndexPoint = VNImagePointForNormalizedPoint(CGPoint(x: indexFingerTip.location.y, y: indexFingerTip.location.x), viewWidth,  viewHeight)
-        if let entity = arView.entity(at: normalizedIndexPoint) as? ModelEntity {
-            switch entity.name {
-            case "playButton":
-                playVideo()
-                
-            case "pauseButton":
-                pauseVideo()
-                
-            case "restartButton":
-                DispatchQueue.main.async {
-                    self.restartVideo(for: entity.parent as! ModelEntity)
-                }
-                
-            default: break
-                
-            }
-        }
-        recentIndexFingerPoint = normalizedIndexPoint
-    }
-    
     
     // MARK: Video Controller
     var isPlaying = false
