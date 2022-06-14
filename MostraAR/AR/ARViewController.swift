@@ -17,6 +17,8 @@ class ARViewController: UIViewController {
     var viewWidth : Int = 0
     var viewHeight : Int = 0
     var numAlbumImage = 1
+    var isRunning = false
+    var timer = Timer()
 
     lazy var request : VNRequest = {
         var handPoseRequest = VNDetectHumanHandPoseRequest(completionHandler: handDetectionCompletionHandler)
@@ -26,6 +28,9 @@ class ARViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
+            self.isRunning = false
+        })
         configureARView()
     }
     
@@ -52,7 +57,7 @@ class ARViewController: UIViewController {
         //arView.enableTapOnObject()
         //arView.debugOptions = [.showAnchorGeometry]
         arView.session.run(config, options: [.resetTracking, .removeExistingAnchors, .resetSceneReconstruction])
-        addFocusSquare()
+        //addFocusSquare()
     }
     
     @IBAction func addOnClick(_ sender: Any) {

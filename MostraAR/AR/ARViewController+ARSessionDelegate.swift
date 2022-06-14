@@ -27,29 +27,32 @@ extension ARViewController: ARSessionDelegate {
 
     func handDetectionCompletionHandler(request: VNRequest?, error: Error?) {
         guard let observation = request?.results?.first as? VNHumanHandPoseObservation else { return }
-        guard let indexFingerTip = try? observation.recognizedPoints(.all)[.indexTip],
+        guard let indexFingerTip = try? observation.recognizedPoints(.indexFinger)[.indexTip],
               indexFingerTip.confidence > 0.3 else {return}
         let normalizedIndexPoint = VNImagePointForNormalizedPoint(CGPoint(x: indexFingerTip.location.y, y: indexFingerTip.location.x), viewWidth,  viewHeight)
         if let entity = arView.entity(at: normalizedIndexPoint) as? ModelEntity  {
-            switch entity.name {
-            case "playButton":
-                playVideo()
-                
-            case "pauseButton":
-                pauseVideo()
-                
-            case "restartButton":
-                DispatchQueue.main.async {
-                    self.restartVideo(for: entity.parent as! ModelEntity)
+            if !isRunning {
+                isRunning = true
+                switch entity.name {
+                case "playButton":
+                    playVideo()
+                    
+                case "pauseButton":
+                    pauseVideo()
+                    
+                case "restartButton":
+                    DispatchQueue.main.async {
+                        self.restartVideo(for: entity.parent as! ModelEntity)
+                    }
+                    
+                case "album":
+                    DispatchQueue.main.async {
+                        self.changeImage(entity: entity)
+                    }
+                    
+                default: break
+                    
                 }
-                
-            case "album":
-                DispatchQueue.main.async {
-                    self.changeImage(entity: entity)
-                }
-                
-            default: break
-                
             }
         }
         recentIndexFingerPoint = normalizedIndexPoint
@@ -60,7 +63,6 @@ extension ARViewController: ARSessionDelegate {
         if numAlbumImage == 6 {
             numAlbumImage = 1
         }
-        print(numAlbumImage)
         var material = SimpleMaterial()
         material.color = .init(tint: .white.withAlphaComponent(0.999), texture: .init(try! .load(named: "album\(numAlbumImage)")))
         entity.model?.materials = [material]
@@ -91,8 +93,8 @@ extension ARViewController: ARSessionDelegate {
         print("Status: \(status)")
     }
     
-    //MARK: Progress
-    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+    //MARK: Progress and Image recognition
+    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
         anchors.compactMap { $0 as? ARImageAnchor }.forEach {
             let referenceImage = $0.referenceImage
             guard let imageName = referenceImage.name else { return }
@@ -106,7 +108,7 @@ extension ARViewController: ARSessionDelegate {
                 anchorEntity.addChild(entityPlane)
                 entityPlane.generateCollisionShapes(recursive: true)
                 arView.scene.anchors.removeAll()
-                addFocusSquare()
+                //addFocusSquare()
                 arView.scene.anchors.append(anchorEntity)
             } else {
                 ProgressController.setProgress(imageName: imageName)
@@ -116,7 +118,7 @@ extension ARViewController: ARSessionDelegate {
                 let anchorEntity = AnchorEntity(.image(group: "AR Resources", name: imageName))
                 anchorEntity.addChild(entityPlane)
                 arView.scene.anchors.removeAll()
-                addFocusSquare()
+                //addFocusSquare()
                 arView.scene.anchors.append(anchorEntity)
                 hapticFeedback()
             }
